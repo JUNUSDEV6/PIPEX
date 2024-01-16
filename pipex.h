@@ -6,7 +6,7 @@
 /*   By: youneshanafi <youneshanafi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 12:33:45 by youneshanaf       #+#    #+#             */
-/*   Updated: 2024/01/13 12:58:48 by youneshanaf      ###   ########.fr       */
+/*   Updated: 2024/01/16 16:10:04 by youneshanaf      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,3 +26,8 @@ typedef struct	s_pipex {
 	t_list	*cmd_list;
 }			t_pipex;
 
+typedef struct	s_cmd {
+	char	**arg_path;
+	int		pipe[2];
+	int		pid;
+}			t_cmd;

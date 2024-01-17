@@ -6,7 +6,7 @@
 /*   By: youneshanafi <youneshanafi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 12:33:45 by youneshanaf       #+#    #+#             */
-/*   Updated: 2024/01/16 16:10:04 by youneshanaf      ###   ########.fr       */
+/*   Updated: 2024/01/17 17:47:53 by youneshanaf      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,3 +31,11 @@ typedef struct	s_cmd {
 	int		pipe[2];
 	int		pid;
 }			t_cmd;
+
+typedef struct	s_list
+{
+	void			*content;
+	struct s_list	*next;
+	struct s_list	*previous;
+}				t_list;
+

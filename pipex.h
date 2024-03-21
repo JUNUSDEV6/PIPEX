@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:58:00 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/03/18 12:18:01 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:18:29 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PIPEX_H
 
 # include <stdio.h>
+# include <fcntl.h>
 
 # define EM "ERROR INPUT\nTHE CORRECT INPUT:\n<./pipex files1 cmd1 cmd2 outfile>"
 

@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:58:06 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/03/21 14:07:35 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/03/22 12:33:10 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,20 @@ int	ft_strncmp(const char *s1, char *s2, size_t n)
 int	main(int argc, char **argv, char **env)
 {
 	t_pipex	pipex;
-
+	int		i = 0;
 	while (*env)
 	{
 		if (!ft_strncmp(*env, "PATH", 4))
-			pipex.path = *env + 5;
+		{
+			pipex.path = ft_split(*env + 5, ':');
+			break;
+		}
 		env++;
 	}
+	while (pipex.path[i])
+		printf("%s\n",pipex.path[i++]);
+	/*
 	pipex.cmd = *ft_split(pipex.path, ':');
-	printf("%c",pipex.cmd);
+	printf("%s",pipex.cmd);*/
 	return(0);
 }

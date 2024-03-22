@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:58:00 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/03/21 14:05:13 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/03/22 12:30:16 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 typedef struct	s_pipex
 {
 	int		pipe[2];
-	char	*path;
+	char	**path;
 	char	*cmd;
 }				t_pipex;
 

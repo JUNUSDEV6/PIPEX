@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 11:18:30 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/03/25 12:57:38 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/03/25 14:07:13 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_strcpy(char *dst, char *src)
 	i = -1;
 	if (!src)
 		return ;
-	while (src[i++])
+	while (src[++i])
 		dst[i] = src[i];
 	dst[i] = '\0';
 }

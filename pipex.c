@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:58:06 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/03/25 14:18:22 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:07:26 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,12 @@ int	main(int argc, char **argv, char **env)
 		{
 			//printf("yo\n");
 			printf("command find : %s\n", full_paths);
-			execv(full_paths, argv);
+			execve(full_paths, argv, env);
 			perror("ERROR");
 			free(full_paths);
 			exit(EXIT_FAILURE);
 		}
+		//printf("pas bonne commande");
 		free(full_paths);
 		i++;
 	}

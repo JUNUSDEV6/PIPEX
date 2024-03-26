@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:58:06 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/03/25 15:07:26 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/03/26 11:17:25 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,30 +37,37 @@ int	main(int argc, char **argv, char **env)
 		printf("Aucun chemin trouvé dans la variable PATH.\n");
 		return (1);
 	}
-	while (pipex.path[i])
-	{
-		full_paths = malloc(ft_strlen(pipex.path[i]) + ft_strlen(argv[1]) + 2);
-		if (!full_paths)
+	int pid = fork();
+	if (!pid) {
+		while (pipex.path[i])
 		{
-			perror("ERROR MALLOC");
-			exit(EXIT_FAILURE);
-		}
-		//printf("%s\n", pipex.path[i]);
-		ft_strcpy(full_paths, pipex.path[i]);
-		ft_strcat(full_paths, "/");
-		ft_strcat(full_paths, argv[1]);
-		if (access(full_paths, X_OK) == 0)
-		{
-			//printf("yo\n");
-			printf("command find : %s\n", full_paths);
-			execve(full_paths, argv, env);
-			perror("ERROR");
+			full_paths = malloc(ft_strlen(pipex.path[i]) + ft_strlen(argv[1]) + 2);
+			if (!full_paths)
+			{
+				perror("ERROR MALLOC");
+				exit(EXIT_FAILURE);
+			}
+			//printf("%s\n", pipex.path[i]);
+			ft_strcpy(full_paths, pipex.path[i]);
+			ft_strcat(full_paths, "/");
+			ft_strcat(full_paths, argv[1]);
+			if (access(full_paths, X_OK) == 0)
+			{
+				//printf("yo\n");
+				printf("command find : %s\n", full_paths);
+				execve(full_paths, &argv[1], env);
+				perror("ERROR");
+				free(full_paths);
+				exit(EXIT_FAILURE);
+			}
+			//printf("pas bonne commande");
 			free(full_paths);
-			exit(EXIT_FAILURE);
+			i++;
 		}
-		//printf("pas bonne commande");
-		free(full_paths);
-		i++;
+	}
+	else if (pid) {
+		waitpid()
+		printf("Le child a fini.\n");
 	}
 	return(0);
 }

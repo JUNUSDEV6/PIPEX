@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:58:00 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/03/25 12:56:33 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/03/28 11:48:27 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,14 @@ typedef struct	s_pipex
 	char	*cmd;
 }				t_pipex;
 
-
+/*****  STR_UTILS  *****/
 char	**ft_split(char const *s, char c);
 int		ft_strlen(char *str);
 int		ft_strncmp(const char *s1, char *s2, size_t n);
 void	ft_strcpy(char *dst, char *src);
 void	ft_strcat(char *dst, char *src);
+
+/*****  ERROR  *****/
+void	cmd_error(void);
+
 #endif

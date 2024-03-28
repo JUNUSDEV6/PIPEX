@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:58:06 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/03/28 10:50:12 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/03/28 11:41:40 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,15 @@
 // 4. acces the argv
 // 5. exev
 
+int	main(int argc, char **argv, char **env)
+{
+	int		pipe_fd[2];
+	pid_t	pid;
+
+	if (argc != 5)
+		cmd_error();
+	
+}
 
 int	main(int argc, char **argv, char **env)
 {

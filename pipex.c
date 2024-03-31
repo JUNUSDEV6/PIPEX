@@ -6,29 +6,54 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:58:06 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/03/31 18:07:48 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/03/31 19:47:26 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-//variable fd 
-//function open -> open
+static void	ft_excv(char **env, char *cmd)
+{
+	// 2 variable
+	//split cmd
+	//check the pass
+	//exceve
+	char	**s_cmd;
+	char	*path;
+
+	s_cmd = ft_split(cmd, ' ');
+	if (!s_cmd)
+		exit(EXIT_FAILURE);
+	path = get_path()
+}
 
 static void	child_Parent_ex(char **argv, char **env, int pipe_fd, bool flag)
 {
 	int	fd;
 
-	if (flag == true)
-		fd = open_file(argv[2], flag);
-	if (!flag)
-		fd = open_file(argv[4], flag);
+	fd = open_file(argv[1], argv[4], flag);
 	if (fd == -1)
 	{
 		ft_putstr_fd(argv[2], 2);
-		
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd(argv[3], 2);
+		ft_putendl_fd(": ERROR file directory", 2);
+		exit(0);
 	}
-
+	if (flag)
+	{
+		dup2(fd, 0);
+		dup2(pipe_fd[1], 1);
+		close(pipe_fd[0]);
+		ft_excv(env, argv[2])
+	}
+	else
+	{
+		dup2(fd, 1);
+		dup2(pipe_fd[0], 0);
+		close(pipe_fd[1]);
+		ft_excv(env, argv[3]);
+	}
 }
 
 static int	path(char **env)

@@ -6,25 +6,63 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:58:06 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/03/28 11:41:40 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/03/31 18:07:48 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-// 1. get the env
-// 2. recup the path
-// 3. split
-// 4. acces the argv
-// 5. exev
 
+//variable fd 
+//function open -> open
+
+static void	child_Parent_ex(char **argv, char **env, int pipe_fd, bool flag)
+{
+	int	fd;
+
+	if (flag == true)
+		fd = open_file(argv[2], flag);
+	if (!flag)
+		fd = open_file(argv[4], flag);
+	if (fd == -1)
+	{
+		ft_putstr_fd(argv[2], 2);
+		
+	}
+
+}
+
+static int	path(char **env)
+{
+	while (*env)
+	{
+		if (ft_strnstr(env, "PATH", 4))
+			exit(EXIT_SUCCES);
+		env++;
+	}
+	exit(EXIT_FAILURE);
+}
+
+//check the way for env
+//--error msg
+// protect the pipe
+// make de fork > pid and protect(-1)
 int	main(int argc, char **argv, char **env)
 {
 	int		pipe_fd[2];
 	pid_t	pid;
 
+	if (!path(env))
+		exit(127);
 	if (argc != 5)
 		cmd_error();
-	
+	if (pipe(pipe_fd) == -1)
+		exit(EXIT_FAILURE);
+	pid = fork();
+	if (pid == -1)
+		exit(EXIT_FAILURE);
+	if (!pid)
+		child_Parent_ex(argv, env, pipe_fd, true);
+	child_Parent_ex(argv, env, pipe_fd, false);
 }
 
 int	main(int argc, char **argv, char **env)

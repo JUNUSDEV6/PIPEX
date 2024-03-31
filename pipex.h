@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:58:00 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/03/28 11:48:27 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/03/31 18:10:44 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ int		ft_strlen(char *str);
 int		ft_strncmp(const char *s1, char *s2, size_t n);
 void	ft_strcpy(char *dst, char *src);
 void	ft_strcat(char *dst, char *src);
+void	ft_putchar_fd(char c, int fd);
+void	ft_putstr_fd(char *s, int fd);
+void	ft_putendl_fd(char *s, int fd);
 
 /*****  ERROR  *****/
 void	cmd_error(void);

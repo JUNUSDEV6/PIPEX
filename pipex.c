@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:58:06 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/03/31 19:47:26 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/04/01 10:24:55 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,21 @@ static void	ft_excv(char **env, char *cmd)
 {
 	// 2 variable
 	//split cmd
-	//check the pass
+	//check the path
+	//protet path
 	//exceve
+	//protect exerceve
 	char	**s_cmd;
 	char	*path;
 
 	s_cmd = ft_split(cmd, ' ');
 	if (!s_cmd)
 		exit(EXIT_FAILURE);
-	path = get_path()
+	path = get_path(s_cmd[0], env, 0);
+	if (!path)
+	{
+
+	}
 }
 
 static void	child_Parent_ex(char **argv, char **env, int pipe_fd, bool flag)
@@ -58,11 +64,12 @@ static void	child_Parent_ex(char **argv, char **env, int pipe_fd, bool flag)
 
 static int	path(char **env)
 {
-	while (*env)
+	int	i;
+	while (env[i])
 	{
 		if (ft_strnstr(env, "PATH", 4))
 			exit(EXIT_SUCCES);
-		env++;
+		i++;
 	}
 	exit(EXIT_FAILURE);
 }

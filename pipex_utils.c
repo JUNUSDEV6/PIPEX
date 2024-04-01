@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:19:14 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/04/01 11:23:04 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/04/01 11:52:32 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ char	*get_path(char *cmd, char **env, int i)
 	i = 0;
 	while (paths[i])
 	{
-		paths = ft_strjoin(paths[i++], '/');
-		if (!paths)
-			free(paths);
-		full_paths = ft_strjoin(paths, cmd);
+		path_cmd = ft_strjoin(paths[i++], '/');
+		if (!path_cmd)
+			free(path_cmd);
+		full_paths = ft_strjoin(path_cmd, cmd);
 		if (!full_paths)
 			free(full_paths);
 		if (acces(full_paths, F_OK))

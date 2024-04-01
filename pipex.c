@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:58:06 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/04/01 10:24:55 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/04/01 12:16:55 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,11 @@ static void	child_Parent_ex(char **argv, char **env, int pipe_fd, bool flag)
 static int	path(char **env)
 {
 	int	i;
+
+	i = 0;
 	while (env[i])
 	{
-		if (ft_strnstr(env, "PATH", 4))
+		if (ft_strnstr(env[i], "PATH", 4))
 			exit(EXIT_SUCCES);
 		i++;
 	}

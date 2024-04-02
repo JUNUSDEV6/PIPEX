@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:19:14 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/04/01 11:52:32 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:30:01 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,36 +23,44 @@ int	open_file(char *argv_in, char *argv_out, bool flag)
 	return (rlt);
 }
 
-//get path
-//3variable
-//check access
-//strnstrenv
-//split
-//protectsplit
-//parcour rlt split et make the way
+char	*ft_free_tab(char **tabs)
+{
+	size_t	i;
+
+	i = 0;
+	while (tabs[i])
+	{
+		free(tabs[i]);
+		i++;
+	}
+	free(tabs);
+	return (NULL);
+}
 
 char	*get_path(char *cmd, char **env, int i)
 {
 	char	**paths;
 	char	*path_cmd;
 	char	*full_paths;
-	
+
 	if (access(cmd, F_OK))
 		return (cmd);
 	while (!ft_strnstr(env[i], "PATH", 4))
 		i++;
-	paths = ft_split(env[i] + 5, ':')
+	paths = ft_split(env[i] + 5, ':');
 	if (!paths)
 		return (0);
 	i = 0;
 	while (paths[i])
 	{
-		path_cmd = ft_strjoin(paths[i++], '/');
+		path_cmd = ft_strjoin(paths[i++], "/");
+		full_paths = ft_strjoin(path_cmd, cmd);
 		if (!path_cmd)
 			free(path_cmd);
-		full_paths = ft_strjoin(path_cmd, cmd);
-		if (!full_paths)
+		if (!access(full_paths, F_OK))
+			return (full_paths);
+		if (full_paths)
 			free(full_paths);
-		if (acces(full_paths, F_OK))
 	}
+	return (ft_free_tab(paths));
 }

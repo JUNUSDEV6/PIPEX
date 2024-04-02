@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:58:06 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/04/01 12:16:55 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:29:46 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 
 static void	ft_excv(char **env, char *cmd)
 {
-	// 2 variable
-	//split cmd
-	//check the path
-	//protet path
-	//exceve
-	//protect exerceve
 	char	**s_cmd;
 	char	*path;
 
@@ -29,11 +23,18 @@ static void	ft_excv(char **env, char *cmd)
 	path = get_path(s_cmd[0], env, 0);
 	if (!path)
 	{
-
+		ft_putstr_fd(EM, 2);
+		ft_putendl_fd(s_cmd[0], 2);
+		ft_free_tab(s_cmd);
+		exit(127);
+	}
+	if (execve(path, s_cmd, env) == -1)
+	{
+		exit(126);
 	}
 }
 
-static void	child_Parent_ex(char **argv, char **env, int pipe_fd, bool flag)
+static void	child_parent_ex(char **argv, char **env, int *pipe_fd, bool flag)
 {
 	int	fd;
 
@@ -51,7 +52,7 @@ static void	child_Parent_ex(char **argv, char **env, int pipe_fd, bool flag)
 		dup2(fd, 0);
 		dup2(pipe_fd[1], 1);
 		close(pipe_fd[0]);
-		ft_excv(env, argv[2])
+		ft_excv(env, argv[2]);
 	}
 	else
 	{
@@ -70,16 +71,12 @@ static int	path(char **env)
 	while (env[i])
 	{
 		if (ft_strnstr(env[i], "PATH", 4))
-			exit(EXIT_SUCCES);
+			exit(EXIT_SUCCESS);
 		i++;
 	}
 	exit(EXIT_FAILURE);
 }
 
-//check the way for env
-//--error msg
-// protect the pipe
-// make de fork > pid and protect(-1)
 int	main(int argc, char **argv, char **env)
 {
 	int		pipe_fd[2];
@@ -95,54 +92,6 @@ int	main(int argc, char **argv, char **env)
 	if (pid == -1)
 		exit(EXIT_FAILURE);
 	if (!pid)
-		child_Parent_ex(argv, env, pipe_fd, true);
-	child_Parent_ex(argv, env, pipe_fd, false);
-}
-
-int	main(int argc, char **argv, char **env)
-{
-	t_pipex	pipex;
-	int		i = 0;
-	char	*full_paths;
-	char	**cmd = ft_split(argv[1], ' ');
-	while (*env)
-	{
-		if (!ft_strncmp(*env, "PATH", 4))
-		{
-			pipex.path = ft_split(*env + 5, ':');
-			break;
-		}
-		env++;
-	}
-	if (!pipex.path)
-	{
-		printf("Aucun chemin trouvé dans la variable PATH.\n");
-		return (1);
-	}
-	while (pipex.path[i])
-	{
-		full_paths = malloc(ft_strlen(pipex.path[i]) + ft_strlen(argv[1]) + 2);
-		if (!full_paths)
-		{
-			perror("ERROR MALLOC");
-			exit(EXIT_FAILURE);
-		}
-		//printf("%s\n", pipex.path[i]);
-		ft_strcpy(full_paths, pipex.path[i]);
-		ft_strcat(full_paths, "/");
-		ft_strcat(full_paths, cmd[0]);
-		if (access(full_paths, X_OK) == 0)
-		{
-			//printf("yo\n");
-			printf("command find : %s\n", full_paths);
-			execve(full_paths, cmd, env);
-			perror("ERROR");
-			free(full_paths);
-			exit(EXIT_FAILURE);
-		}
-		//printf("pas bonne commande");
-		free(full_paths);
-		i++;
-	}
-	return(0);
+		child_parent_ex(argv, env, pipe_fd, true);
+	child_parent_ex(argv, env, pipe_fd, false);
 }

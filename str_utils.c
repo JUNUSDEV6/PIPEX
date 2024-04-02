@@ -6,23 +6,33 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 11:18:30 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/04/01 11:18:45 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:06:42 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	ft_strncmp(const char *s1, char *s2, size_t n)
+char	*ft_strnstr(const char *find, const char *to_find, size_t len)
 {
 	size_t	i;
+	size_t	j;
 
 	i = 0;
-	if (n == 0)
+	if (!find && !len)
 		return (0);
-	while (i < n && (s1[i] || s2[i]))
+	if (to_find[0] == '\0' || to_find == find)
+		return ((char *)find);
+	while (find[i] != '\0')
 	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		j = 0;
+		while (find[i + j] == to_find[j] && (i + j) < len)
+		{
+			if (find[i + j] == '\0' && to_find[j] == '\0')
+				return ((char *)&find[i]);
+			j++;
+		}
+		if (to_find[j] == '\0')
+			return ((char *)(find + i));
 		i++;
 	}
 	return (0);
@@ -40,34 +50,7 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-void	ft_strcpy(char *dst, char *src)
-{
-	int	i;
-
-	i = -1;
-	if (!src)
-		return ;
-	while (src[++i])
-		dst[i] = src[i];
-	dst[i] = '\0';
-}
-
-void	ft_strcat(char *dst, char *src)
-{
-	if (!dst || !src)
-		return ;
-	while (*dst)
-		dst++;
-	while (*src)
-	{
-		*dst = *src;
-		dst++;
-		src++;
-	}
-	*dst = '\0';
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*dst;
 	int		i;

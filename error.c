@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 11:41:52 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/03/29 11:27:37 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:22:08 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	cmd_error(void)
 
 void	exit_error(bool boolean)
 {
-	if (bool == true)
-		exit(EXIT_SUCCES);
+	if (boolean == true)
+		exit(EXIT_SUCCESS);
 	exit(EXIT_FAILURE);
 }

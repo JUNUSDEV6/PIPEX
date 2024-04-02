@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:58:06 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/04/02 13:54:44 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:08:25 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,10 @@ int	main(int argc, char **argv, char **env)
 	int		pipe_fd[2];
 	pid_t	pid;
 
-	printf("1");
 	if (path(env))
 		exit(127);
-	printf("2");
 	if (argc != 5)
 		cmd_error();
-	printf("1");
 	if (pipe(pipe_fd) == -1)
 		exit(EXIT_FAILURE);
 	pid = fork();

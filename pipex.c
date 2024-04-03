@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:58:06 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/04/03 11:41:45 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/04/03 13:21:00 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	ft_excv(char **env, char *cmd)
 	path = get_path(s_cmd[0], env, 0);
 	if (!path)
 	{
-		ft_putstr_fd(EM, 2);
+		ft_putstr_fd("ERROR: CMD\n", 2);
 		ft_putendl_fd(s_cmd[0], 2);
 		ft_free_tab(s_cmd);
 		exit(127);
@@ -44,13 +44,11 @@ static void	child_parent_ex(char **argv, char **env, int *pipe_fd, bool flag)
 		ft_putstr_fd(argv[2], 2);
 		ft_putstr_fd(": ", 2);
 		ft_putstr_fd(argv[3], 2);
-		printf("fuk");
 		ft_putendl_fd(": ERROR file directory", 2);
 		exit(0);
 	}
 	if (flag)
 	{
-		write(2, "fdpw\n", 5);
 		dup2(fd, 0);
 		dup2(pipe_fd[1], 1);
 		close(pipe_fd[0]);

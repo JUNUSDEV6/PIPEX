@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:58:06 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/04/03 13:21:00 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:12:14 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	ft_excv(char **env, char *cmd)
 	}
 	if (execve(path, s_cmd, env) == -1)
 	{
+		write(2, *s_cmd, ft_strlen(*s_cmd));
 		exit(126);
 	}
 }

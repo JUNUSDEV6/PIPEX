@@ -2,7 +2,7 @@ NAME = pipex
 SRCS = pipex.c pipex_utils.c put_fd.c ft_split.c str_utils.c error.c
 
 OBJS = ${SRCS:.c=.o}
-CC = gcc
+CC = gcc -g 
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
 

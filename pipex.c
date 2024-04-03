@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:58:06 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/04/02 14:08:25 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/04/03 11:41:45 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,13 @@ static void	child_parent_ex(char **argv, char **env, int *pipe_fd, bool flag)
 		ft_putstr_fd(argv[2], 2);
 		ft_putstr_fd(": ", 2);
 		ft_putstr_fd(argv[3], 2);
+		printf("fuk");
 		ft_putendl_fd(": ERROR file directory", 2);
 		exit(0);
 	}
 	if (flag)
 	{
+		write(2, "fdpw\n", 5);
 		dup2(fd, 0);
 		dup2(pipe_fd[1], 1);
 		close(pipe_fd[0]);

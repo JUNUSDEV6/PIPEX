@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:19:14 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/04/02 14:20:31 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/04/03 11:39:04 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ int	open_file(char *argv_in, char *argv_out, bool flag)
 {
 	int	rlt;
 
-	if (flag)
+	if (flag == true)
 	{
-		rlt = open(argv_in, O_RDONLY | 0777);
-		printf("1\n");
+		rlt = open(argv_in, O_RDONLY, 0777);
+		printf("%d\n", rlt);
 	}
 	else
 	{
 		rlt = open(argv_out, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-			printf("2\n");
+		printf("%d\n", rlt);
 	}
 	return (rlt);
 }
@@ -49,6 +49,7 @@ char	*get_path(char *cmd, char **env, int i)
 	char	*path_cmd;
 	char	*full_paths;
 
+	printf("drere");
 	if (access(cmd, F_OK))
 		return (cmd);
 	while (!ft_strnstr(env[i], "PATH", 4))

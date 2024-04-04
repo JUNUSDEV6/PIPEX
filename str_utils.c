@@ -6,11 +6,17 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 11:18:30 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/04/02 12:06:42 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/04/04 09:53:04 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	cmd_error(void)
+{
+	perror(EM);
+	exit(EXIT_FAILURE);
+}
 
 char	*ft_strnstr(const char *find, const char *to_find, size_t len)
 {

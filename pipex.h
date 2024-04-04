@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:58:00 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/04/02 12:31:15 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/04/04 09:52:18 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,5 @@ void	ft_putendl_fd(char *s, int fd);
 
 /*****  ERROR  *****/
 void	cmd_error(void);
-void	exit_error(bool boolean);
 
 #endif

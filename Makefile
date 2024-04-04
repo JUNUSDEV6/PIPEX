@@ -1,5 +1,5 @@
 NAME = pipex
-SRCS = pipex.c pipex_utils.c put_fd.c ft_split.c str_utils.c error.c
+SRCS = pipex.c pipex_utils.c put_fd.c ft_split.c str_utils.c
 
 OBJS = ${SRCS:.c=.o}
 CC = gcc -g 

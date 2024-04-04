@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:58:06 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/04/03 15:12:14 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/04/04 10:10:49 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,16 @@ static void	ft_excv(char **env, char *cmd)
 	path = get_path(s_cmd[0], env, 0);
 	if (!path)
 	{
-		ft_putstr_fd("ERROR: CMD\n", 2);
+		ft_putstr_fd("ERROR: CMD :", 2);
 		ft_putendl_fd(s_cmd[0], 2);
 		ft_free_tab(s_cmd);
 		exit(127);
 	}
 	if (execve(path, s_cmd, env) == -1)
 	{
-		write(2, *s_cmd, ft_strlen(*s_cmd));
+		ft_putstr_fd("ERROR: CMD :", 2);
+		ft_putendl_fd(s_cmd[0], 2);
+		ft_free_tab(s_cmd);
 		exit(126);
 	}
 }
@@ -42,10 +44,7 @@ static void	child_parent_ex(char **argv, char **env, int *pipe_fd, bool flag)
 	fd = open_file(argv[1], argv[4], flag);
 	if (fd == -1)
 	{
-		ft_putstr_fd(argv[2], 2);
-		ft_putstr_fd(": ", 2);
-		ft_putstr_fd(argv[3], 2);
-		ft_putendl_fd(": ERROR file directory", 2);
+		perror("file1 or file2");
 		exit(0);
 	}
 	if (flag)

@@ -6,9 +6,11 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:50:53 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/04/26 15:38:54 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/04/26 16:02:55 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "pipex.h"
 
 void	exec(char *cmd, char **envp)
 {
@@ -20,6 +22,8 @@ void	exec(char *cmd, char **envp)
 		exit(EXIT_FAILURE);
 	path = get_path(s_cmd, envp);
 	if (!path)
+		exit(EXIT_FAILURE);
+	if (execve(path, s_cmd, envp) == -1)
 		exit(EXIT_FAILURE);
 }
 
@@ -103,5 +107,5 @@ int	main(int argc, char **argv, char *envp)
 	while (i < argc - 2)
 		ft_pipe(argv[i++], envp);
 	dup2(fd_out, 1);
-	//exec
+	exec()
 }

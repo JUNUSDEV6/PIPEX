@@ -6,13 +6,13 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:50:53 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/04/26 16:02:55 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/04/29 14:13:03 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
-void	exec(char *cmd, char **envp)
+static void	exec(char *cmd, char **envp)
 {
 	char	**s_cmd;
 	char	*path;
@@ -20,14 +20,14 @@ void	exec(char *cmd, char **envp)
 	s_cmd = ft_split(cmd, ' ');
 	if (!s_cmd)
 		exit(EXIT_FAILURE);
-	path = get_path(s_cmd, envp);
+	path = get_path(*s_cmd, envp);
 	if (!path)
 		exit(EXIT_FAILURE);
 	if (execve(path, s_cmd, envp) == -1)
 		exit(EXIT_FAILURE);
 }
 
-void	here_txt(char **argv, int p_fd)
+static void	here_txt(char **argv, int *p_fd)
 {
 	char	*line;
 
@@ -47,7 +47,7 @@ void	here_txt(char **argv, int p_fd)
 	}
 }
 
-void	here_doc(char **argv)
+static void	here_doc(char **argv)
 {
 	pid_t	pid;
 	int		p_fd[2];
@@ -67,7 +67,7 @@ void	here_doc(char **argv)
 	}
 }
 
-void	ft_pipe(char *cmd, char **envp)
+static void	ft_pipe(char *cmd, char **envp)
 {
 	pid_t	pid;
 	int		p_fd[2];
@@ -90,7 +90,7 @@ void	ft_pipe(char *cmd, char **envp)
 	}
 }
 
-int	main(int argc, char **argv, char *envp)
+int	main(int argc, char **argv, char **envp)
 {
 	int	i;
 	int	fd_out;
@@ -101,11 +101,18 @@ int	main(int argc, char **argv, char *envp)
 		if (argc < 3)
 			exit(0);
 		i = 3;
-		fd_out = open_file(argv[1], 0, argc, envp);
+		fd_out = open_file(argv[argc - 1], 2, argv, envp);
 		here_doc(argv);
+	}
+	else
+	{
+		i = 2;
+		fd_in = open_file(argv[1], 0, argv, envp);
+		fd_out = open_file(argv[argc - 1], 1, argv, envp);
+		dup2(fd_in, 0);
 	}
 	while (i < argc - 2)
 		ft_pipe(argv[i++], envp);
 	dup2(fd_out, 1);
-	exec()
+	exec(argv[argc -2], envp);
 }

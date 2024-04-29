@@ -6,11 +6,50 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 12:11:34 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/04/28 13:20:38 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/04/29 14:15:47 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	no_path(char **argv, char **envp)
+#include "pipex_bonus.h"
+
+void	ft_putchar_fd(char c, int fd)
+{
+	if (fd < 0)
+		return ;
+	write (fd, &c, 1);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	if (!s || fd < 0)
+		return ;
+	while (s[i])
+	{
+		ft_putchar_fd(s[i], fd);
+		i++;
+	}
+}
+
+int	ft_strncmp(const char *s1, char *s2, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	if (n == 0)
+		return (0);
+	while (i < n && (s1[i] || s2[i]))
+	{
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return (0);
+}
+
+static int	no_path(char **argv, char **envp)
 {
 	int	i;
 
@@ -42,7 +81,7 @@ int	open_file(char *file, int in_out, char **argv, char **envp)
 	return (rlt);
 }
 
-char	*ft_free_tab(char **tabs)
+static char	*ft_free_tab(char **tabs)
 {
 	size_t	i;
 
@@ -56,11 +95,12 @@ char	*ft_free_tab(char **tabs)
 	return (NULL);
 }
 
-char	get_path(char *cmd, char **envp)
+char	*get_path(char *cmd, char **envp)
 {
 	char	**paths;
 	char	*path_cmd;
-	char	*fuul_paths;
+	char	*full_paths;
+	int		i = 0;
 
 	if (!access(cmd, X_OK))
 		return (cmd);

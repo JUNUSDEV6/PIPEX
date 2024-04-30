@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:50:53 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/04/29 14:13:03 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:39:43 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,18 @@ static void	here_txt(char **argv, int *p_fd)
 {
 	char	*line;
 
+	//printf("6");
 	close(p_fd[0]);
 	while (1)
 	{
 		line = get_next_line(0);
+		//printf("%s", line);
 		if (!line)
 			exit(EXIT_FAILURE);
-		if (ft_strncmp(line, argv[2], ft_strlen(argv[2])))
+		if (!ft_strncmp(line, argv[2], ft_strlen(argv[2])))
 		{
+			//printf("0\n");
+			//printf("%s\n", line);
 			free(line);
 			exit(EXIT_SUCCESS);
 		}
@@ -51,7 +55,7 @@ static void	here_doc(char **argv)
 {
 	pid_t	pid;
 	int		p_fd[2];
-	
+	//printf("4");
 	if (pipe(p_fd) == -1)
 		exit(1);
 	pid = fork();
@@ -96,19 +100,22 @@ int	main(int argc, char **argv, char **envp)
 	int	fd_out;
 	int	fd_in;
 
-	if (!ft_strncmp(argv[2], "<<", 2))
+	if (!ft_strncmp(argv[1], "heredoc", 7))
 	{
-		if (argc < 3)
+		//printf("1");
+		if (argc < 6)
 			exit(0);
 		i = 3;
+		//printf("1");
 		fd_out = open_file(argv[argc - 1], 2, argv, envp);
+		//printf("3");
 		here_doc(argv);
 	}
 	else
 	{
 		i = 2;
 		fd_in = open_file(argv[1], 0, argv, envp);
-		fd_out = open_file(argv[argc - 1], 1, argv, envp);
+		fd_out = 1;
 		dup2(fd_in, 0);
 	}
 	while (i < argc - 2)

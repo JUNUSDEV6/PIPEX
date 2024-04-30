@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 12:11:34 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/04/29 14:15:47 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/04/30 14:18:35 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,23 @@ static int	no_path(char **argv, char **envp)
 int	open_file(char *file, int in_out, char **argv, char **envp)
 {
 	int	rlt;
-
-	if (!no_path(argv, envp))
+	//printf("2");
+	if (no_path(argv, envp))
 		exit(127);
 	rlt = 0;
 	if (in_out == 0)
-		rlt = open(file, O_RDONLY, 777);
+		rlt = open(file, O_RDONLY, 0777);
 	if (in_out == 1)
-		rlt = open(file, O_WRONLY | O_CREAT | O_TRUNC, 777);
+		rlt = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (in_out == 2)
-		rlt = open(file, O_WRONLY | O_CREAT | O_APPEND, 777);
+		rlt = open(file, O_WRONLY | O_CREAT | O_APPEND, 0777);
 	if (rlt == -1)
+	{
+		printf("1");
 		exit(0);
+	}
+	//printf("1");
+	//printf("5");
 	return (rlt);
 }
 
@@ -112,14 +117,15 @@ char	*get_path(char *cmd, char **envp)
 	i = 0;
 	while (paths[i])
 	{
-		path_cmd = ft_strjoin(paths[i++], '/');
+		path_cmd = ft_strjoin(paths[i++], "/");
 		full_paths = ft_strjoin(path_cmd, cmd);
 		if (!path_cmd)
 			free(path_cmd);
-		if (!access(full_paths, X_OK))
+		if (!access(full_paths, F_OK))
 			return (full_paths);
 		if (full_paths)
 			free(full_paths);
 	}
 	return (ft_free_tab(paths));
 }
+

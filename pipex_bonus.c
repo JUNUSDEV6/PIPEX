@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:50:53 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/05/01 15:21:07 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/05/01 15:51:04 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,8 @@ int	main(int argc, char **argv, char **envp)
 	}
 	else
 	{
-		i = 2;
-		fd_in = open_file(argv[1], 0, argv, envp);
+		i = 1;
+		fd_in = 1;
 		fd_out = 1;
 		dup2(fd_in, 0);
 	}

@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:50:53 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/04/30 15:39:43 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/05/01 15:21:07 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,8 @@ int	main(int argc, char **argv, char **envp)
 		fd_out = 1;
 		dup2(fd_in, 0);
 	}
-	while (i < argc - 2)
+	while (i < argc - 1)
 		ft_pipe(argv[i++], envp);
 	dup2(fd_out, 1);
-	exec(argv[argc -2], envp);
+	exec(argv[argc - 1], envp);
 }

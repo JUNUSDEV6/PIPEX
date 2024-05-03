@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/24 12:50:53 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/05/01 15:51:04 by yohanafi         ###   ########.fr       */
+/*   Created: 2024/05/03 16:48:28 by yohanafi          #+#    #+#             */
+/*   Updated: 2024/05/03 17:02:09 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	here_doc(char **argv)
 	}
 }
 
-static void	ft_pipe(char *cmd, char **envp)
+static void	ft_pipe(char *cmd, char **envp, int nb, int argc)
 {
 	pid_t	pid;
 	int		p_fd[2];
@@ -84,7 +84,12 @@ static void	ft_pipe(char *cmd, char **envp)
 	if (!pid)
 	{
 		close(p_fd[0]);
-		dup2(p_fd[1], 1);
+		printf("");
+
+		if (nb < argc - 2) {
+			dup2(p_fd[1], 1);
+		}
+		close(p_fd[1]);
 		exec(cmd, envp);
 	}
 	else
@@ -93,6 +98,8 @@ static void	ft_pipe(char *cmd, char **envp)
 		dup2(p_fd[0], 0);
 	}
 }
+
+
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -118,8 +125,10 @@ int	main(int argc, char **argv, char **envp)
 		fd_out = 1;
 		dup2(fd_in, 0);
 	}
-	while (i < argc - 1)
-		ft_pipe(argv[i++], envp);
-	dup2(fd_out, 1);
-	exec(argv[argc - 1], envp);
+	while (i < argc - 1) {
+		ft_pipe(argv[i], envp, i, argc);
+		i++;
+	}
+	// dup2(fd_out, 1);
+	// exec(argv[argc - 1], envp);
 }

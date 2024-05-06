@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 16:48:28 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/05/03 17:02:09 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/05/06 12:15:22 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void	ft_pipe(char *cmd, char **envp, int nb, int argc)
 		close(p_fd[0]);
 		printf("");
 
-		if (nb < argc - 2) {
+		if (nb <= argc - 2) {
 			dup2(p_fd[1], 1);
 		}
 		close(p_fd[1]);
@@ -125,7 +125,7 @@ int	main(int argc, char **argv, char **envp)
 		fd_out = 1;
 		dup2(fd_in, 0);
 	}
-	while (i < argc - 1) {
+	while (i < argc) {
 		ft_pipe(argv[i], envp, i, argc);
 		i++;
 	}
